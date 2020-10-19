@@ -32,12 +32,11 @@ function Bot(pin, name){
 const process = require('process');
 const rl = require('readline').createInterface(process.stdin, process.stdout);
 
-rl.on("line", (str)=> { //event = quand on rentre qqch dans la console, il récupère ce qu'on a écrit sous forme de string
+rl.on("line", (str) => { //event = quand on rentre qqch dans la console, il récupère ce qu'on a écrit sous forme de string
 	if(str.includes("createBots")) { //créer des bots, syntaxe: createBotsPIN (le PIN doit contenir 7 chiffres)
 		//bot = new Bot(str.substr(str.length - 7, str.length - 1), "bot"); 
-
-		for(var i = 0; i < 20; i++){
-			bots.push(Bot(str.substr(str.length - 7, str.length - 1), ("Bot n°" + (bots.length+1) )));
+		for(var i = 0; i < 30; i++){
+			bots.push(new Bot(str.substr(str.length - 7, str.length - 1), ("Bot n°" + (bots.length+1) )));
 		}
 	}
 
@@ -64,6 +63,12 @@ rl.on("line", (str)=> { //event = quand on rentre qqch dans la console, il récu
 
 	if(str.includes("exit")) { //arrete le script
 		process.exit();
+	}
+
+	if(str.includes("log")){// log les bots
+		for(var i = 0; i < bots.length; i++){
+			log(i+": "+bots[i]);
+		}
 	}
 });
 //FIN DES INTERRACTIONS TERMINALES
