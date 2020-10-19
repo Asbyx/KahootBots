@@ -4,7 +4,11 @@ log("Kahoot joined !");
 
 
 var ans = [0, 1, 2, 3], bots = []; //contient les réponse possibles
+
+
+//15 characters max for the names
 var names = [];
+var name = "Eugène Bot"
 
 function Bot(pin, name){
 	this.client = new Kahoot();
@@ -36,7 +40,7 @@ rl.on("line", (str) => { //event = quand on rentre qqch dans la console, il réc
 	if(str.includes("createBots")) { //créer des bots, syntaxe: createBotsPIN (le PIN doit contenir 7 chiffres)
 		//bot = new Bot(str.substr(str.length - 7, str.length - 1), "bot"); 
 		for(var i = 0; i < 30; i++){
-			if(names.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), ("Bot n°" + (bots.length+1) )));
+			if(names.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (name + (bots.length+1) )));
 		}
 	}
 
