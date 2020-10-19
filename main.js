@@ -4,7 +4,7 @@ log("Kahoot joined !");
 
 
 var ans = [0, 1, 2, 3], bots = []; //contient les réponse possibles
-
+var names = [];
 
 function Bot(pin, name){
 	this.client = new Kahoot();
@@ -36,7 +36,7 @@ rl.on("line", (str) => { //event = quand on rentre qqch dans la console, il réc
 	if(str.includes("createBots")) { //créer des bots, syntaxe: createBotsPIN (le PIN doit contenir 7 chiffres)
 		//bot = new Bot(str.substr(str.length - 7, str.length - 1), "bot"); 
 		for(var i = 0; i < 30; i++){
-			bots.push(new Bot(str.substr(str.length - 7, str.length - 1), ("Bot n°" + (bots.length+1) )));
+			if(names.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), ("Bot n°" + (bots.length+1) )));
 		}
 	}
 
@@ -52,12 +52,15 @@ rl.on("line", (str) => { //event = quand on rentre qqch dans la console, il réc
 	}
 
 
-	if(str.includes("vote")) { //fais voter tous les bots
+	if(str.includes("vote")) { //fais voter tous les bots, pour que tous les bots votent 1 seule réponse -> vote2
 		//bot.vote(str.substr(str.length - 1, str.length - 1));
-
-		for(var i = 0; i < bots.length; i++){
-			bots[i].vote();
-		}
+			for(var i = 0; i < bots.length; i++){
+				if(str.substr(str.length - 1, str.length - 1) == "e"){
+					bots[i].vote();
+				} else {
+					bots[i].vote(str.substr(str.length - 1, str.length - 1));
+				}
+			}
 	}
 
 
