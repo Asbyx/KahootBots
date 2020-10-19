@@ -30,12 +30,11 @@ exit    (stop the script, all bots will be disconnected from the quizz session)
 --------------------------------------------------
 
 Urgent update !
--Have a log for every bots which have the right answer
--have the same amount of bots on every answer, not full random, in fct of their classement: 
-	the 1st take answer 0, the 2nd answer 1, etc, the 4th answer 0 etc
+
 
 Planned updates, be free to start them or pull request !
-
+-precise the pin in the console, not in parameter when bots are created
+-update the README (Kappa)
 -graphical app
 -select the number of bots sent
 -name some bots
