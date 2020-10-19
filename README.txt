@@ -35,3 +35,5 @@ Planned updates, be free to start them or pull request !
 -graphical app
 -select the number of bots sent
 -name some bots
+-make all the bots vote for 1 answer
+-include an answer which has been exclude
