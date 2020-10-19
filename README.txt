@@ -15,7 +15,7 @@ example:
 cd path/to/the/file
 node main     (or node main.js)
 createBots5975215     (the pin must have 7 digits)
-*20 bots have been created*
+*30 bots have been created*
 
 *the quizz has started*
 vote
@@ -29,9 +29,9 @@ vote
 exit    (stop the script, all bots will be disconnected from the quizz session)
 --------------------------------------------------
 
+
 Planned updates, be free to start them or pull request !
 
 -graphical app
 -select the number of bots sent
--log the number of bots in the quizz session
 -name some bots
