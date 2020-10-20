@@ -5,17 +5,17 @@ Use the node js command prompt.
 
 -------------------------------------------------
 HOW TO LAUNCH + EXAMPLE
-Install node js
-in the node command prompt:  npm install kahoot.js-updated
-close the command prompt
+Installation:
+download repository
+install node js
+in the node js command prompt:  npm install kahoot.js-updated
+restart the command prompt
 
-open the node command prompt, there you go !
-
-example:
+example: (instructions you have to write in the console)
 cd path/to/the/file
 node main     (or node main.js)
-createBots5975215     (the pin must have 7 digits)
-*30 bots have been created*
+bots5975215     (the pin must have 7 digits)
+*100 bots have been created*
 
 *the quizz has started*
 vote
@@ -26,15 +26,25 @@ vote
 vote
 *all the bots have voted, but no one for the 2nd answer possible, the "1nope" command has excluded it*
 
-exit    (stop the script, all bots will be disconnected from the quizz session)
+*another question*
+3nope
+2nope
+1nope
+0nope
+add"Spain"
+vote
+*all the bots entered Spain*
+
+exit    (stop the script, all bots will be disconnected from the quizz session after a short time)
 --------------------------------------------------
 
-Urgent update !
+Urgent updates !
+nothing.
 
 
 Planned updates, be free to start them or pull request !
--precise the pin in the console, not in parameter when bots are created
--update the README (Kappa)
--graphical app
+-precise the pin in the console with a command, not in parameter when bots are created
+-graphical app, which be the simpliest possible to use (no console, just a double click to start it)
 -select the number of bots sent
 -name some bots
+-write a more precise documentation
