@@ -7,8 +7,10 @@ var ans = [0, 1, 2, 3], bots = []; //ans: contains all possible answers
 
 
 //12 characters max for the names
+//uncomment the names to have randoms names instead of the default name
 var names = [];
-var name = "Not the Bot"
+//var names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
+var name = "Bot";
 
 function Bot(pin, name){
 	this.client = new Kahoot();
@@ -50,14 +52,15 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 
 		let interval = setInterval(() => {
 			if(names.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (name + (bots.length+1) )));
+			else bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (names[Math.floor( Math.random()*names.length )] +"("+ (bots.length+1)+")" )));
 			current++;
 			if(current >= nbr){
 				clearInterval(interval);
+			log("Current numbers of bots in game: "+ bots.length);
 			}
-		}, 50);
+		}, 30);
+		log("Starting to create bots");
 
-
-		log("Current numbers of bots in game: "+ bots.length);
 	}
 
 
@@ -96,7 +99,7 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 			if(current >= nbr){
 				clearInterval(interval);
 			}
-		}, 25);
+		}, 10);
 	}
 
 
