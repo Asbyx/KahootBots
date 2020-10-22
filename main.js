@@ -15,7 +15,7 @@ var names = [];
 
 	//12 characters max for the names & name
 //names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
-var name = "Bot";
+var name = "Bot ";
 
 function Bot(pin, name){
 	this.client = new Kahoot();
@@ -61,14 +61,14 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 				if(army.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (names[Math.floor( Math.random()*names.length )]+ (String.fromCharCode(bots.length+96)) )));
 				else {
 					//si c'est army
-					if(current === 0){
-						bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "General " + army[0]));
+					if(current == nbr-1){
+						bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "GENERAL " + army[0]));
 					}
 					else { // si c'est pas le général 
-						if(current < nbr/10){
-							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "Sergent " + army[0] + current));		
+						if(current%(nbr/10) == 0){
+							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "SERGENT " + army[0] + current/(nbr/10)));		
 						} else {
-							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "Soldier " + army[0] + current - Math.floor(nbr/10)));		
+							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "Soldier " + army[0] + (current - Math.floor(nbr/10))));		
 						}
 					}
 				}
@@ -78,7 +78,7 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 				clearInterval(interval);
 			log("Current numbers of bots in game: "+ bots.length);
 			}
-		}, 30);
+		}, 150);
 		log("Starting to create bots");
 
 	}
