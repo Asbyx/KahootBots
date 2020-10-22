@@ -39,12 +39,16 @@ exit    (stop the script, all bots will be disconnected from the quizz session a
 --------------------------------------------------
 
 Urgent updates !
-nothing.
+-graphical app, which be the simpliest possible to use (no console, just a double click to start it){
+		create a bat file which find the ip of the pc, open a tab on the ip:port where socket.io is listening
+		pin
+		functions
+		boutons
+		logs
+	} -> just double click on the bat file to be redirect on the html page
+
 
 
 Planned updates, be free to start them or pull request !
--precise the pin in the console with a command, not in parameter when bots are created
--graphical app, which be the simpliest possible to use (no console, just a double click to start it)
 -select the number of bots sent
--name some bots
 -write a more precise documentation

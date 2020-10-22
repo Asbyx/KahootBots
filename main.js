@@ -6,10 +6,15 @@ log("Kahoot joined !");
 var ans = [0, 1, 2, 3], bots = []; //ans: contains all possible answers
 
 
-//12 characters max for the names
-//uncomment the names to have randoms names instead of the default name
+var army = [];
 var names = [];
-//var names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
+
+
+	//comment the ones you wont use (not upper, below)
+//army = ["prime"]; //5 caracter max
+
+	//12 characters max for the names & name
+//names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
 var name = "Bot";
 
 function Bot(pin, name){
@@ -35,7 +40,7 @@ function Bot(pin, name){
 
 	this.client.on("QuestionEnd", obj => {
 		this.score = obj.totalScore;
-		if(obj.isCorrect) log("yoohhoo !");
+		if(obj.isCorrect) log(this.score);
 	});
 }
 
@@ -51,8 +56,23 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		let current = 0;
 
 		let interval = setInterval(() => {
-			if(names.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (name + (bots.length+1) )));
-			else bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (names[Math.floor( Math.random()*names.length )] +"("+ (bots.length+1)+")" )));
+			if(names.length === 0 && army.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (name + (bots.length+1) )));
+			else {
+				if(army.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (names[Math.floor( Math.random()*names.length )]+ (String.fromCharCode(bots.length+96)) )));
+				else {
+					//si c'est army
+					if(current === 0){
+						bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "General " + army[0]));
+					}
+					else { // si c'est pas le général 
+						if(current < nbr/10){
+							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "Sergent " + army[0] + current));		
+						} else {
+							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "Soldier " + army[0] + current - Math.floor(nbr/10)));		
+						}
+					}
+				}
+			}
 			current++;
 			if(current >= nbr){
 				clearInterval(interval);
@@ -99,7 +119,7 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 			if(current >= nbr){
 				clearInterval(interval);
 			}
-		}, 10);
+		}, 100);
 	}
 
 
