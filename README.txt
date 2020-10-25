@@ -40,11 +40,11 @@ exit    (stop the script, all bots will be disconnected from the quizz session a
 
 Urgent updates !
 -graphical app, which be the simpliest possible to use (no console, just a double click to start it){
-		create a bat file which find the ip of the pc, open a tab on the ip:port where socket.io is listening
-		pin
+		create a bat file which launch the server, find the ip of the pc, open a tab on the ip:port where socket.io is listening
+		get the pin
 		functions
-		boutons
-		logs
+		buttons
+		page closed -> script stops
 	} -> just double click on the bat file to be redirect on the html page
 
 
