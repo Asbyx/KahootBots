@@ -14,7 +14,8 @@ restart the command prompt
 example: (instructions you have to write in the console)
 cd path/to/the/file
 node main     (or node main.js)
-bots5975215     (the pin must have 7 digits)
+5975215pin 		(the pin has been stored)
+bots
 *100 bots have been created*
 
 *the quizz has started*
@@ -37,6 +38,8 @@ vote
 
 exit    (stop the script, all bots will be disconnected from the quizz session after a short time)
 --------------------------------------------------
+
+
 
 Urgent updates !
 -graphical app, which be the simpliest possible to use (no console, just a double click to start it){
