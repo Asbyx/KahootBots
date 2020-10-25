@@ -4,7 +4,7 @@ const client = new Kahoot();
 log("Kahoot joined !");
 
 
-var ans = [0, 1, 2, 3], bots = []; //ans: contains all possible answers
+var ans = [0, 1, 2, 3], bots = [], pin = "000000"; //ans: contains all possible answers
 
 
 var army = [];
@@ -63,19 +63,19 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 
 		let interval = setInterval(() => {
 			if(Math.floor(Math.random()*15) == 5) {
-				if(names.length === 0 && army.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (name + (bots.length+1) )));
+				if(names.length === 0 && army.length === 0) bots.push(new Bot(pin, (name + (bots.length+1) )));
 				else {
-					if(army.length === 0) bots.push(new Bot(str.substr(str.length - 7, str.length - 1), (names[bots.length])));
+					if(army.length === 0) bots.push(new Bot(pin, (names[bots.length])));
 					else {
 						//si c'est army
 						if(current == nbr-1){
-							bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "GENERAL " + army[0]));
+							bots.push(new Bot(pin, "GENERAL " + army[0]));
 						}
 						else { // si c'est pas le général 
 							if(current%(nbr/10) == 0){
-								bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "SERGENT " + army[0] + current/(nbr/10)));		
+								bots.push(new Bot(pin, "SERGENT " + army[0] + current/(nbr/10)));		
 							} else {
-								bots.push(new Bot(str.substr(str.length - 7, str.length - 1), "Soldier " + army[0] + (current - Math.floor(nbr/10))));		
+								bots.push(new Bot(pin, "Soldier " + army[0] + (current - Math.floor(nbr/10))));		
 							}
 						}
 					}
@@ -100,6 +100,11 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		}
 
 		log(" ans: "+ans);		
+	}
+
+	if(str.includes("pin")) { //enter the pin: syntaxe: #######pin
+		pin = str.substr(0, str.length-3);
+		log(pin);
 	}
 
 	if(str.includes("add")) { //add a possible answer syntaxe: addNEW_ANSWER
