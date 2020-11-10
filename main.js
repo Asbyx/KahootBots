@@ -15,8 +15,8 @@ var names = [];
 
 	//12 characters max for the names & name
 //names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
-//var names = ranNames.getRandomNames(100);
-var name = "Bot ";
+names = ranNames.getRandomNames(100);
+//var name = "Bot ";
 
 function Bot(pin, name){
 	this.client = new Kahoot();
@@ -46,7 +46,7 @@ function Bot(pin, name){
 
 	this.client.on("QuizEnd", (obj) => {
 		this.score = obj.rank;
-		if(this == bots[bots.length-1]) end();
+		end();
 	});
 }
 
@@ -62,7 +62,7 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		let current = 0;
 
 		let interval = setInterval(() => {
-			if(Math.floor(Math.random()*15) == 5) {
+			if(Math.floor(Math.random()*7) == 2) {
 				if(names.length === 0 && army.length === 0) bots.push(new Bot(pin, (name + (bots.length+1) )));
 				else {
 					if(army.length === 0) bots.push(new Bot(pin, (names[bots.length])));
@@ -81,12 +81,13 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 					}
 				}
 				current++;
+				log("Bot "+ bots.length + " created");	
 			}
 			if(current >= nbr){
 				clearInterval(interval);
 			log("Current numbers of bots in game: "+ bots.length);
 			}
-		}, 10);
+		}, 100);
 		log("Starting to create bots");
 
 	}
@@ -121,18 +122,20 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		let current = 0;
 
 		let interval = setInterval(() => {
-			if(str.length == 4){
-				//bots[i].vote();
-				bots[current].vote(current%(ans.length));
-			} else {
-				bots[current].vote(str.substr(str.length - 1, str.length - 1));
-			}	
+			if(Math.floor(Math.random()*4) == 2){
+				if(str.length == 4){
+					//bots[i].vote();
+					bots[current].vote(current%(ans.length));
+				} else {
+					bots[current].vote(str.substr(str.length - 1, str.length - 1));
+				}	
 
-			current++;
+				current++;
+			}
 			if(current >= nbr){
 				clearInterval(interval);
 			}
-		}, 20);
+		}, 35);
 	}
 
 
