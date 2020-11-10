@@ -15,7 +15,7 @@ var names = [];
 
 	//12 characters max for the names & name
 //names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
-names = ranNames.getRandomNames(100);
+names = ranNames.getRandomNames(50);
 //var name = "Bot ";
 
 function Bot(pin, name){
@@ -24,6 +24,7 @@ function Bot(pin, name){
 
 	this.name = name;
 	this.question;
+	this.isOk = false;
 	this.score = 0;
 
 	this.vote = function(vote){ //answer the content of ans[vote], if undefined, select a random among the ans list
@@ -48,6 +49,10 @@ function Bot(pin, name){
 		this.score = obj.rank;
 		end();
 	});
+
+	this.client.on("NameAccept", (obj) => {
+		this.isOk = true;
+	});
 }
 
 
@@ -62,7 +67,7 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		let current = 0;
 
 		let interval = setInterval(() => {
-			if(Math.floor(Math.random()*7) == 2) {
+			if(Math.floor(Math.random()*6) == 2) {
 				if(names.length === 0 && army.length === 0) bots.push(new Bot(pin, (name + (bots.length+1) )));
 				else {
 					if(army.length === 0) bots.push(new Bot(pin, (names[bots.length])));
@@ -123,14 +128,16 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 
 		let interval = setInterval(() => {
 			if(Math.floor(Math.random()*4) == 2){
-				if(str.length == 4){
-					//bots[i].vote();
-					bots[current].vote(current%(ans.length));
-				} else {
-					bots[current].vote(str.substr(str.length - 1, str.length - 1));
-				}	
+				if(bots[current].isOk){
+					if(str.length == 4){
+						//bots[i].vote();
+						bots[current].vote(current%(ans.length));
+					} else {
+						bots[current].vote(str.substr(str.length - 1, str.length - 1));
+					}	
 
-				current++;
+					current++;
+				}
 			}
 			if(current >= nbr){
 				clearInterval(interval);
