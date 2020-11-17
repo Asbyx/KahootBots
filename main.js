@@ -4,7 +4,7 @@ const client = new Kahoot();
 log("Kahoot joined !");
 
 
-var ans = [0, 1, 2, 3], bots = [], pin = "000000"; //ans: contains all possible answers
+var ans = [0, 1, 2, 3], bots = [], endVoteTab = [], pin = "000000"; //ans: contains all possible answers
 
 
 var army = [];
@@ -15,7 +15,7 @@ var names = [];
 
 	//12 characters max for the names & name
 //names = ["Antoine", "Maxime", "John", "Patrick", "Baptiste", "Quentin", "Cécilia", "Camille", "Claire", "Hugues", "Arnaud", "Victor", "Mathilde", "Eric", "Valentin", "Pauline", "Nathan", "Laure", "Margot", "jerem", "Gaetan", "Keviin", "KEVIN", "Jamila", "Mario", "Steve", "Luigi"];
-names = ranNames.getRandomNames(50);
+names = ranNames.getRandomNames(100);
 //var name = "Bot ";
 
 function Bot(pin, name){
@@ -42,7 +42,7 @@ function Bot(pin, name){
 
 	this.client.on("QuestionEnd", obj => {
 		this.score = obj.totalScore;
-		if(obj.isCorrect) log(this.name + ": " + this.score);
+		if(obj.isCorrect) endVoteTab.push(this);
 	});
 
 	this.client.on("QuizEnd", (obj) => {
@@ -113,6 +113,10 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		log(pin);
 	}
 
+	if(str.includes("endvote")) { //log all the bots which had a good answer on last question
+		endVote();
+	}
+
 	if(str.includes("add")) { //add a possible answer syntaxe: addNEW_ANSWER
 		ans.push(str.substr(3, str.length - 1));
 
@@ -122,6 +126,8 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 
 	if(str.includes("vote")) { //make all the bots vote. If you want all the bots to vote 1 answer: syntaxe vote3
 		bots.sort(function(a, b) {return (a.score - b.score);});
+
+		endVoteTab = [];
 
 		let nbr = bots.length;
 		let current = 0;
@@ -150,14 +156,23 @@ rl.on("line", (str) => { //event = when somthing is send to the console, what we
 		process.exit();
 	}
 
-	if(str.includes("log")){//log what the bots list contains and the numbers of bots
+	if(str.includes("log")){ //log what the bots list contains and the numbers of bots
+		bots.sort(function(a, b) {return (b.score - a.score);});
 		for(var i = 0; i < bots.length; i++){
-			log(i+": "+bots[i]);
+			log(i+": "+bots[i].name + ", " + bots[i].score);
 		}
 		log("Numbers of bots : "+bots.length);
 	}
 });
 //END OF CONSOLE INTERRACTIONS
+
+function endVote(){
+	endVoteTab.sort(function(a, b) {return (a.score - b.score);});
+	for (var i = 0; i < endVoteTab.length; i++) {
+		log(endVoteTab[i].name + ": " + endVoteTab[i].score);
+	}
+	endVoteTab = [];
+}
 
 function end (){
 	bots.sort(function(a, b) {return (b.score - a.score);});
